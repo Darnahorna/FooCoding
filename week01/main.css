@@ -18,10 +18,11 @@ body {
   );
   line-height: 1.5;
 }
-.container {
+
+main {
   display: grid;
   justify-content: space-around;
-  grid-template-columns: 5fr 4fr;
+  grid-template-columns: 3fr 2fr;
   margin: 3em auto;
   padding: 2em;
   background-color: white;
@@ -79,7 +80,4 @@ p {
 }
 
 @media (max-width: 768px) {
-  .container {
-    max-width: 95%;
-  }
 }
