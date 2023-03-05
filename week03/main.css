@@ -1,0 +1,125 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --text-opacity: 1;
+}
+
+body,
+button,
+input,
+textarea {
+  color: #456;
+  color: rgba(68, 85, 102, var(--text-opacity));
+  font-family: Graphik, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+img,
+svg {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+li a {
+  display: block;
+}
+
+li {
+  float: left;
+}
+
+.message {
+  position: relative;
+  top: 0;
+
+  box-shadow: none;
+  color: #000;
+  background: #fd3;
+
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.75;
+  padding: 0.5rem 1.5rem;
+  font-size: 13px;
+}
+.top-menu {
+  display: flex;
+  height: 2.5rem;
+  padding-left: 1.5rem;
+  justify-content: space-between;
+  background-color: #f7f8f8;
+}
+
+.top-menu-ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+.top-menu-ul li a {
+  padding: 0.5rem;
+  color: #a6a9b1;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  transition: color 125ms ease;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+}
+.middle-menu {
+  display: flex;
+  justify-content: flex-start;
+  font-family: Graphik Compact, sans-serif;
+  height: 4rem;
+  box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 10%);
+}
+.second-level {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.second-level li {
+  display: block;
+}
+.second-level li a {
+  padding: 0 0.5rem;
+  font-size: 1rem;
+  line-height: 4rem;
+  color: rgba(80, 86, 102, 0.75);
+  transition: color 125ms ease;
+  text-decoration: none;
+  font-weight: 600;
+}
+.logo-ukraine {
+  margin-left: 0;
+  margin-top: 20px;
+}
+.logo {
+  align-self: center;
+}
+.logo-img {
+  width: 25%;
+  display: inline;
+}
+.ukraine {
+  width: 10%;
+  display: inline;
+}
