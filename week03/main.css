@@ -120,8 +120,6 @@ input {
   overflow: auto;
   padding: 0 0.75rem;
   scrollbar-width: none;
-  -webkit-overflow-scrolling: initial;
-  -webkit-overflow-scrolling: touch;
 }
 .second-level-menu {
   position: relative;
@@ -155,7 +153,6 @@ input {
 .card-image {
   background-position: bottom;
   background-size: cover;
-  -o-object-fit: cover;
   object-fit: cover;
   height: 100%;
   max-width: none;
@@ -358,14 +355,12 @@ input {
 .o-media > * {
   position: absolute;
   background-size: cover;
-  -o-object-fit: cover;
   object-fit: cover;
   height: 100%;
   width: 100%;
   bottom: 0;
   right: 0;
   background-position: 50% 50%;
-  -o-object-position: 50% 50%;
   object-position: 50% 50%;
 }
 .trending-index {
