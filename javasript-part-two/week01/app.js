@@ -76,6 +76,19 @@ const booksObj = {
   },
 };
 
+const imgObj = {
+  toKillMockingbird: "images/71FxgtFKcQL.webp",
+  book1974: "images/71kxa1-0mfL.webp",
+  catcherInRye: "images/61fgOuZfBGL.webp",
+  prideAndPrejudice: "images/91HqOO4DmRL._AC_UF1000_1000_QL80_.webp",
+  animalFarm: "images/61nb5YGnMXL.webp",
+  braveNewWorld: "images/51pcVzgJiXL.webp",
+  theGreatGatsby: "images/71AeXTp-mQL._AC_UF1000_1000_QL80_.webp",
+  theHobbit: "images/710-HcoP38L._AC_UF1000_1000_QL80_.webp",
+  lordOfTheFlies: "images/81WUAoL-wFL._AC_UF1000_1000_QL80_.webp",
+  oneHundredYears: "images/81MI6-TpYkL._AC_UF1000_1000_QL80_.webp",
+};
+
 const root = document.querySelector(".root");
 const ul = document.createElement("ul");
 root.appendChild(ul);
@@ -95,7 +108,8 @@ for (let i = 0; i < booksIds.length; i++) {
   const alt = document.createAttribute("alt");
   const src = document.createAttribute("src");
   alt.value = booksObj[`${field}`].name;
-  src.value = booksObj[`${field}`].img;
+  src.value = imgObj[`${field}`];
+
   img.setAttributeNode(alt);
   img.setAttributeNode(src);
 

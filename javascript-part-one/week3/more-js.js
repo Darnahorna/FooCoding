@@ -122,4 +122,3 @@ console.log(o3 == o1);
 
 let bar = 42;
 let a = typeof typeof bar;
-conslole.log(a);
