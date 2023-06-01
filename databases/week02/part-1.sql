@@ -34,7 +34,7 @@ DEALLOCATE PREPARE stmt5;
 
 
 
-SET @continentCountries = 'SELECT country.Name FROM country WHERE country.Continent = (SELECT country.Continent FROM country WHERE country.Name = ?);';
+SET @continentCountries = 'SELECT IFNULL(( SELECT GROUP_CONCAT(country.Name SEPARATOR ", ")  FROM country WHERE country.Continent = (SELECT country.Continent FROM country WHERE country.Name = ?)), "FALSE") AS result;';
 PREPARE stmt6 FROM @continentCountries;
 SET @c = "Ukraine";
 EXECUTE stmt6 USING @c;
