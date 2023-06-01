@@ -1,0 +1,83 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap");
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background: radial-gradient(
+    328px at 2.9% 15%,
+    rgb(191, 224, 251) 0%,
+    rgb(232, 233, 251) 25.8%,
+    rgb(252, 239, 250) 50.8%,
+    rgb(234, 251, 251) 77.6%,
+    rgb(240, 251, 244) 100.7%
+  );
+  line-height: 1.5;
+}
+
+main {
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: 3fr 2fr;
+  margin: 3em auto;
+  padding: 2em;
+  background-color: white;
+  border-radius: 1em;
+  box-shadow: 9px 10px 20px rgba(156, 148, 148, 0.2);
+  max-width: 50%;
+}
+
+.profile-image {
+  width: 40%;
+  height: auto;
+}
+
+body,
+aside {
+  justify-self: stretch;
+}
+
+h1 {
+  font-size: 36px;
+  font-family: "Merriweather", serif;
+}
+h2 {
+  font-size: 18px;
+}
+h3 {
+  color: #2079c7;
+  margin: 0.2em 0;
+}
+
+section {
+  margin: 1.5em;
+}
+ul {
+  padding: 0;
+}
+li {
+  margin: 0.2em 1em;
+}
+p {
+  margin: 0;
+}
+.no-bullets {
+  list-style-type: none;
+}
+.highlighted-text {
+  font-family: "Merriweather", serif;
+  font-style: italic;
+  font-size: 18px;
+}
+.small-text {
+  opacity: 0.7;
+  font-size: 12px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+}
