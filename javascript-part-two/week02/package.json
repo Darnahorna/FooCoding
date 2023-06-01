@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0"
+  },
+  "name": "week02",
+  "version": "1.0.0",
+  "description": "Homework 02 js2",
+  "main": "doubleOddNumbers.js",
+  "author": "",
+  "license": "ISC"
+}
