@@ -26,16 +26,11 @@ DEALLOCATE PREPARE stmt4;
 
 SET @languageCountries ='SELECT IFNULL((SELECT GROUP_CONCAT(country.Name SEPARATOR ", ")  FROM country INNER JOIN countrylanguage cl ON country.Code=cl.CountryCode WHERE cl.Language IN
 (SELECT  cl.Language FROM country INNER JOIN countrylanguage cl ON country.Code=cl.CountryCode WHERE country.Name = ? AND cl.IsOfficial=true) 
-AND cl.IsOfficial=true AND country.Name <>?),0) AS result';
+AND cl.IsOfficial=true AND country.Name <>? AND country.Continent = (SELECT country.Continent FROM country WHERE country.Name = ?)),0) AS result;';
 PREPARE stmt5 FROM @languageCountries;
-SET @c = "Spain";
-EXECUTE stmt5 USING @c, @c;
+SET @c = "Germany";
+EXECUTE stmt5 USING @c, @c, @c;
 DEALLOCATE PREPARE stmt5;
 
 
 
-SET @continentCountries = 'SELECT IFNULL(( SELECT GROUP_CONCAT(country.Name SEPARATOR ", ")  FROM country WHERE country.Continent = (SELECT country.Continent FROM country WHERE country.Name = ?)), "FALSE") AS result;';
-PREPARE stmt6 FROM @continentCountries;
-SET @c = "Ukraine";
-EXECUTE stmt6 USING @c;
-DEALLOCATE PREPARE stmt6;

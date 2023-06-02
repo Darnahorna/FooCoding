@@ -11,7 +11,7 @@ BEGIN
     END IF;
 END //
 
-DELIMITER ;alter
+DELIMITER ;
 #---------------------------------------------------
 DELIMITER //
 
@@ -23,4 +23,7 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
+
 

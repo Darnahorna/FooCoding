@@ -12,11 +12,19 @@ const connection = mysql.createConnection({
 
 function executeRequest(userRequest, mySqlRequest, callback) {
   const request = prompt(userRequest);
-  connection.execute(mySqlRequest, [request], callback);
+
+  connection.prepare(mySqlRequest, (err, statement) => {
+    console.log(statement);
+    statement.execute([request], callback);
+    statement.close();
+  });
 }
 function executeRequest2(userRequest, mySqlRequest, callback) {
   const request = prompt(userRequest);
-  connection.execute(mySqlRequest, [request, request], callback);
+  connection.prepare(mySqlRequest, (err, statement) => {
+    statement.execute([request, request, request], callback);
+    statement.close();
+  });
 }
 
 function display(err, results) {
@@ -67,14 +75,7 @@ function main() {
     case "5":
       executeRequest2(
         "Same official languages with which COUNTRY would you like to find out: ",
-        'SELECT IFNULL((SELECT GROUP_CONCAT(country.Name ) FROM country INNER JOIN countrylanguage cl ON country.Code=cl.CountryCode WHERE cl.Language IN (SELECT  cl.Language FROM country INNER JOIN countrylanguage cl ON country.Code=cl.CountryCode WHERE country.Name = ? AND cl.IsOfficial=true) AND cl.IsOfficial=true AND country.Name <>?),"FALSE") AS result',
-        display
-      );
-      break;
-    case "6":
-      executeRequest(
-        "Same continent countries with which COUNTRY would you like to find out: ",
-        'SELECT IFNULL(( SELECT GROUP_CONCAT(country.Name SEPARATOR ", ")  FROM country WHERE country.Continent = (SELECT country.Continent FROM country WHERE country.Name = "Ukraine")), "FALSE") AS result;',
+        'SELECT IFNULL((SELECT GROUP_CONCAT(country.Name SEPARATOR ", ")  FROM country INNER JOIN countrylanguage cl ON country.Code=cl.CountryCode WHERE cl.Language IN (SELECT  cl.Language FROM country INNER JOIN countrylanguage cl ON country.Code=cl.CountryCode WHERE country.Name = ? AND cl.IsOfficial=true) AND cl.IsOfficial=true AND country.Name <>? AND country.Continent = (SELECT country.Continent FROM country WHERE country.Name = ?)),"FALSE") AS result;',
         display
       );
       break;
