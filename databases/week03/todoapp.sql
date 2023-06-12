@@ -16,6 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `alerts`
+--
+
+DROP TABLE IF EXISTS `alerts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `alerts` (
+  `idAlert` int NOT NULL AUTO_INCREMENT,
+  `alertMessage` varchar(255) NOT NULL,
+  `alertDate` date NOT NULL,
+  `userId` int NOT NULL,
+  PRIMARY KEY (`idAlert`),
+  KEY `fk_alertUser_id_idx` (`userId`),
+  CONSTRAINT `fk_alerUser_id` FOREIGN KEY (`userId`) REFERENCES `user` (`iduser`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alerts`
+--
+
+LOCK TABLES `alerts` WRITE;
+/*!40000 ALTER TABLE `alerts` DISABLE KEYS */;
+INSERT INTO `alerts` VALUES (1,'Task \"Pick up tamplates from publishing\" is due tomorrow and is not complete.','2023-06-12',4),(2,'Task \"Take exam in C++\" is due tomorrow and is not complete.','2023-06-12',3),(3,'Task \"List of bugs\" is due tomorrow and is not complete.','2023-06-12',4);
+/*!40000 ALTER TABLE `alerts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tag`
 --
 
@@ -27,7 +55,7 @@ CREATE TABLE `tag` (
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`idtag`),
   UNIQUE KEY `idtag_UNIQUE` (`idtag`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,6 +64,7 @@ CREATE TABLE `tag` (
 
 LOCK TABLES `tag` WRITE;
 /*!40000 ALTER TABLE `tag` DISABLE KEYS */;
+INSERT INTO `tag` VALUES (1,'Personal'),(2,'Study'),(3,'Work'),(4,'Finance'),(5,'Project'),(6,'Course'),(7,'Shopping'),(8,'Travel');
 /*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,7 +84,7 @@ CREATE TABLE `taglist` (
   KEY `fk_listItemId_idx` (`listItemId`),
   CONSTRAINT `fk_listItemId` FOREIGN KEY (`listItemId`) REFERENCES `todoitem` (`idtoDoItem`),
   CONSTRAINT `fk_tagId` FOREIGN KEY (`tagId`) REFERENCES `tag` (`idtag`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,6 +93,7 @@ CREATE TABLE `taglist` (
 
 LOCK TABLES `taglist` WRITE;
 /*!40000 ALTER TABLE `taglist` DISABLE KEYS */;
+INSERT INTO `taglist` VALUES (1,1,1),(2,2,2),(3,3,3),(4,7,1),(5,6,2),(6,5,3);
 /*!40000 ALTER TABLE `taglist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,13 +109,13 @@ CREATE TABLE `todoitem` (
   `name` varchar(45) NOT NULL,
   `description` varchar(245) DEFAULT NULL,
   `isCompleted` enum('T','F') NOT NULL,
-  `reminder` timestamp(6) NULL DEFAULT NULL,
+  `reminder` date DEFAULT NULL,
   `listId` int NOT NULL,
   PRIMARY KEY (`idtoDoItem`),
   UNIQUE KEY `idtoDoItem_UNIQUE` (`idtoDoItem`),
   KEY `fk_listId_idx` (`listId`),
-  CONSTRAINT `fk_listId` FOREIGN KEY (`listId`) REFERENCES `todolist` (`idList`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `fk_listId` FOREIGN KEY (`listId`) REFERENCES `todolist` (`idList`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15250 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +124,7 @@ CREATE TABLE `todoitem` (
 
 LOCK TABLES `todoitem` WRITE;
 /*!40000 ALTER TABLE `todoitem` DISABLE KEYS */;
-INSERT INTO `todoitem` VALUES (1,'Shoping List','List of groceries for the next (25) week','T',NULL,2),(2,'Frank\'s birthday','Buy a book','T','2023-06-21 08:00:00.000000',1),(3,'Go for the excursion with Mia','Malmo Opera','T',NULL,4),(4,'Call Victor Brayan','Public Policy Discussion','T','2023-06-10 06:00:00.000000',3),(5,'call mama','df','T',NULL,1),(6,'Bring the ball back to Fritidsbanken','They work until 4pm','F','2023-05-27 08:00:00.000000',1),(7,'Bring the ball back to Fritidsbanken','They work until 4pm','F','2023-05-27 08:00:00.000000',1),(8,'Bring the ball back to Fritidsbanken','They work until 4pm','T','2023-05-27 08:00:00.000000',1),(9,'Bring the ball back to Fritidsbanken','They work until 4pm','T','2023-05-27 08:00:00.000000',1);
+INSERT INTO `todoitem` VALUES (1,'Shoping List','List of groceries for the next (25) week','T',NULL,2),(2,'Frank\'s birthday','Buy a book','F','2023-06-15',1),(3,'Call Victor Brayan','Public Policy Discussion','F','2023-06-10',3),(4,'Prepare financial report for May','Include activities with kids','F',NULL,4),(5,'To do groceries','Milk, eggs, tea, oil, pasta, apples, bananas','T',NULL,5),(6,'Take exam in C++','Read about pointers','F','2023-06-13',6),(7,'Read about macro economy','Economy','F',NULL,7),(8,'Pick up tamplates from publishing','B.V. book','F','2023-06-13',8),(9,'Make Facebook post about last event','It was amazing adventure ...','F',NULL,9),(10,'List of bugs','include isEmpy and if Exist validation ','F','2023-06-13',10);
 /*!40000 ALTER TABLE `todoitem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,14 +138,14 @@ DROP TABLE IF EXISTS `todolist`;
 CREATE TABLE `todolist` (
   `idList` int NOT NULL AUTO_INCREMENT,
   `listName` varchar(200) NOT NULL,
-  `created` timestamp(6) NOT NULL,
   `userId` int NOT NULL,
   `reminder` timestamp(6) NULL DEFAULT NULL,
+  `created` timestamp(6) NULL DEFAULT NULL,
   PRIMARY KEY (`idList`),
   UNIQUE KEY `idList_UNIQUE` (`idList`),
   KEY `fk_userId_idx` (`userId`),
   CONSTRAINT `fk_userId` FOREIGN KEY (`userId`) REFERENCES `user` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +154,7 @@ CREATE TABLE `todolist` (
 
 LOCK TABLES `todolist` WRITE;
 /*!40000 ALTER TABLE `todolist` DISABLE KEYS */;
-INSERT INTO `todolist` VALUES (1,'Personal','2023-06-05 12:29:59.000000',1,'2023-06-06 08:00:00.000000'),(2,'Home','2023-06-05 12:29:59.000000',1,'2023-06-06 18:00:00.000000'),(3,'Work','2023-06-05 12:29:59.000000',1,NULL),(4,'Travel','2023-06-05 12:29:59.000000',1,NULL),(5,'5g','2023-06-05 12:29:59.000000',1,'2023-06-05 12:29:59.000000');
+INSERT INTO `todolist` VALUES (1,'Personal',1,'2023-06-06 08:00:00.000000','2023-06-12 11:57:59.000000'),(2,'Home',1,'2023-06-06 18:00:00.000000','2023-06-12 11:57:59.000000'),(3,'Work',1,'2023-06-15 18:00:00.000000','2023-06-12 11:57:59.000000'),(4,'Scouterna',2,NULL,'2023-06-12 11:57:59.000000'),(5,'Shopping List',3,NULL,'2023-06-12 11:57:59.000000'),(6,'University',3,NULL,'2023-06-12 11:57:59.000000'),(7,'University',1,NULL,'2023-06-12 11:57:59.000000'),(8,'Job',4,NULL,'2023-06-12 11:57:59.000000'),(9,'Work',3,NULL,'2023-06-12 11:57:59.000000'),(10,'BugFix',4,NULL,'2023-06-12 11:57:59.000000');
 /*!40000 ALTER TABLE `todolist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +170,7 @@ CREATE TABLE `user` (
   `name` varchar(45) NOT NULL,
   `surname` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `username` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
   PRIMARY KEY (`iduser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -151,7 +181,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Daria','Nahorna','qwerty','darnahorna'),(2,'Johan','Möller','123456789','johan');
+INSERT INTO `user` VALUES (1,'Daria','Nahorna','qwerty','darCo@gmail.com'),(2,'Johan','Möller','123456789','johan@scout.se'),(3,'Lotta','Thorsson','jG0ZhD7l0','lottaT@holline.uk'),(4,'Emil','Bergman','Hm&03ls','bergmanE@bing.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -164,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-07 16:37:19
+-- Dump completed on 2023-06-12 14:30:36
