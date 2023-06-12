@@ -33,13 +33,45 @@ node server.js
 The server will start listening on port 3000. You can access the API endpoints using HTTP methods (POST, DELETE, PUT) on the following routes:
 
 - **POST /listItem**: Add a new to-do item(s).
+Example of body (raw) request.
+```[{
+"name": "Bring the ball back to Fritidsbanken", 
+"description": "They work until 4pm", 
+"isCompleted": "F", 
+"reminder": "2023-06-13",
+"listId": 1
+},
+{
+"name": "Discuss deployment problem with Harry", 
+"description": "Fly.io", 
+"isCompleted": "F", 
+"reminder": "2023-06-13",
+"listId": 8
+}
+]
+```
 - **DELETE /listItem**: Delete one or more to-do items.
+Example of body (raw) request.
+```[15254,15255,15256]```
 - **PUT /listItem/ :id**: Mark a to-do item as complete.
-- **POST /list**: Add a new to-do list(s).
+Example of URL.```http://localhost:3000/listItem/10```
+- **POST /list**: Add a new to-do list(s). 
+Example of body (raw) request. ```[{
+    "idList": 11, 
+    "listName": "Plants", 
+    "created": "2023-06-05 20:00:00", 
+    "userId": 1}
+]```
 - **DELETE /list**: Delete a to-do list.
+- Example of body (raw) request.
+```[11]```
 - **PUT /list/ :id**: Set a reminder for a to-do list.
+Example of URL.```http://localhost:3000/list/10```
 
 Please note that you need to replace **_:id_** with the actual ID of the item or list you want to modify.
+
+## Testing 
+For better testing you can use Postman Public Workspace. Click here - https://www.postman.com/darnahorna/workspace/to-do-applicationl
 
 ## Database Schema
 
