@@ -71,7 +71,7 @@ Example of URL.```http://localhost:3000/list/10```
 Please note that you need to replace **_:id_** with the actual ID of the item or list you want to modify.
 
 ## Testing 
-For better testing you can use Postman Public Workspace. Click here - https://www.postman.com/darnahorna/workspace/to-do-applicationl
+For better testing you can use Postman Public Workspace. Click here - https://www.postman.com/darnahorna/workspace/to-do-application
 
 ## Database Schema
 
