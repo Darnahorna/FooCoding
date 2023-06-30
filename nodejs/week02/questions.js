@@ -7,19 +7,6 @@ import { addNew, updateFields, display, getById } from "./controllers.js";
  * @param {string} query
  * @returns {Promise.<string>}
  */
-// export const question = async (query) => {
-//   const readline = createInterface({
-//     input: stdin,
-//     output: stdout,
-//   });
-
-//   return new Promise((resolve) => {
-//     readline.question(query, (answer) => {
-//       readline.close();
-//       resolve(answer);
-//     });
-//   });
-// };
 
 const main = async () => {
   const resourceName = await question(
