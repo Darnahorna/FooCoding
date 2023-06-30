@@ -1,2 +1,6 @@
 # Ignore files related to API keys
 *.env
+
+# Dependency directories
+node_modules/
+jspm_packages/

@@ -31,7 +31,7 @@ export const requestHandler = async (request, response) => {
   const fullEndpoint = `http://${address}:${port}${url}`;
 
   // Set response headers
-  response.setHeader("Content-Type", "application/json");
+
   response.setHeader("Access-Control-Allow-Origin", "*");
   response.setHeader(
     "Access-Control-Allow-Methods",
@@ -48,14 +48,15 @@ export const requestHandler = async (request, response) => {
       const id = parseInt(usersEndpoint?.pathname?.groups?.id);
 
       switch (method) {
-        case "POST":
-          const data = JSON.parse(await getRequestData(request));
-          const newUser = await addUser(data);
+        case "POST": {
+          const body = JSON.parse(await getRequestData(request));
+          const newUser = await addUser(body);
+          response.setHeader("Content-Type", "application/json");
           response.statusCode = StatusCodes.CREATED;
           response.write("User is successfully added!");
           response.end(JSON.stringify(newUser));
           break;
-
+        }
         case "DELETE":
           const userToDelete = await getUserById(id);
           if (userToDelete) {
@@ -72,6 +73,7 @@ export const requestHandler = async (request, response) => {
           if (id) {
             const user = await getUserById(id);
             if (user) {
+              response.setHeader("Content-Type", "application/json");
               response.statusCode = StatusCodes.OK;
               response.end(JSON.stringify(user));
             } else {
@@ -80,6 +82,7 @@ export const requestHandler = async (request, response) => {
             }
           } else {
             const users = await getAllUsers();
+            response.setHeader("Content-Type", "application/json");
             response.statusCode = StatusCodes.OK;
             response.end(JSON.stringify(users));
           }
@@ -90,6 +93,7 @@ export const requestHandler = async (request, response) => {
           const userToUpdate = await getUserById(id);
           if (userToUpdate) {
             const updatedUser = await updateUser(id, body);
+            response.setHeader("Content-Type", "application/json");
             response.statusCode = StatusCodes.CREATED;
             response.write("User is successfully updated!");
             response.end(JSON.stringify(updatedUser));
@@ -126,6 +130,7 @@ export const requestHandler = async (request, response) => {
             await deletePost(id);
             response.statusCode = StatusCodes.NO_CONTENT;
             response.end(JSON.stringify(postToDelete));
+            response.write("Deleted successfully!");
           } else {
             response.statusCode = StatusCodes.NOT_FOUND;
             response.end(JSON.stringify({ message: "Post is not found" }));

@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "first_name": "John",
-    "last_name": "Doe",
-    "email": "john@example.com",
-    "gender": "male"
+    "first_name": "Elton",
+    "last_name": "Avard",
+    "email": "eavard0@themeforest.net",
+    "gender": "Male"
   },
   {
     "id": 2,
@@ -134,9 +134,9 @@
   },
   {
     "id": 20,
-    "first_name": "Maria",
-    "last_name": "Styles",
-    "email": "darnahorna@gmail.com",
+    "first_name": "Brittan",
+    "last_name": "Meynell",
+    "email": "bmeynellj@yahoo.co.jp",
     "gender": "Female"
   }
 ]
